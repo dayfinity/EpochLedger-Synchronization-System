@@ -108,6 +108,24 @@ class ConsensusEngine {
 // Initialize system components
 const ledger = new Ledger();
 const staking = new StakingLayer();
-const engine 
+const engine = new ConsensusEngine(staking, ledger);
+
+// Register validators
+staking.addValidator("Node-X", 60);
+staking.addValidator("Node-Y", 40);
+staking.addValidator("Node-Z", 75);
+staking.addValidator("Node-W", 55);
+
+// Create and process blocks
+const blockA = engine.generateBlock("Transaction Batch A");
+const blockB = engine.generateBlock("Configuration Update");
+const blockC = engine.generateBlock("Reward Distribution");
+
+// Run consensus epochs
+engine.runEpoch(blockA);
+engine.runEpoch(blockB);
+engine.runEpoch(blockC);
+
+// Final ledger output
 console.log("\n--- FINAL LEDGER ---");
 console.log(ledger.view());
